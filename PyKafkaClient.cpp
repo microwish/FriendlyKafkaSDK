@@ -254,10 +254,10 @@ kafka_producer_t *create_kafka_producer(const char *conf_path,
 
     // Producer config
     // TODO
-    rd_kafka_conf_set(conf, "queue.buffering.max.messages", "500000", NULL, 0);
+    //rd_kafka_conf_set(conf, "queue.buffering.max.messages", "500000", NULL, 0);
     //rd_kafka_conf_set(conf, "batch.num.messages", "100", NULL, 0);
     //rd_kafka_conf_set(conf, "queue.buffering.max.ms", "5", NULL, 0);
-    rd_kafka_conf_set(conf, "socket.max.fails", "0", NULL, 0);
+    //rd_kafka_conf_set(conf, "socket.max.fails", "0", NULL, 0);
     //rd_kafka_conf_set(conf, "message.send.max.retries", "3", NULL, 0);
     //rd_kafka_conf_set(conf, "retry.backoff.ms", "500", NULL, 0);
     //rd_kafka_conf_set(conf, "delivery.report.only.error", "true", NULL, 0);
@@ -382,7 +382,7 @@ int produce_messages(kafka_producer_t *producer,
         if (ret == -1) {
             write_log(NULL, LOG_ERR, "rd_kafka_produce failed with errno[%d]",
                       errno);
-            rd_kafka_poll(producer, 2);
+            rd_kafka_poll(producer, 50);
             continue;
         }
         num++;
